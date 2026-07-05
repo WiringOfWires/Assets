@@ -25,5 +25,11 @@ modders = {
     {rid = 291820825, reason = "Lexis"},
     {rid = 293986385, reason = "Lexis"},
     {rid = 297060556, reason = "Lexis"},
-    {rid = 299624414, reason = "Lexis"}
+    {rid = 299624414, reason = "Lexis"},
+    {rid = 296520316, reason = "Lexis"},
+    {rid = 201794529, reason = "Lexis"},
+    {rid = 197248629, reason = "Lexis"},
+    {rid = 296419414, reason = "Cherax Prime"},
+    {rid = 266032940, reason = "Cherax"},
+    {rid = 299377231, reason = "Cherax Prime"},
 }
