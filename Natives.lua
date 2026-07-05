@@ -67,3 +67,4 @@ GET_SCRIPT_HOST = function() return Natives.InvokeInt(0x1D6A14F1F9A736FC, "freem
 GET_HOST_PLAYER_INDEX = function() return Natives.InvokeInt(0x8251FB94DC4FDFC8) end
 GET_HOST_PLAYER_INDEX = function() return Natives.InvokeInt(0x8251FB94DC4FDFC8) end
 SET_PED_SHOOTING = function(ped, x, y, z) Natives.InvokeVoid(0x96A05E4FB321B1BA, ped, x, y, z, true) end
+BREAK_OBJECT = function(object) Natives.InvokeVoid(0xE7E4C198B0185900, object, true, true) end
