@@ -1,7 +1,6 @@
 -------------------------------------------------- Chat History --------------------------------------------------
 local ChatHistory = {}
 local cooldown = 0
-
 EventMgr.RegisterHandler(eLuaEvent.ON_CHAT_MESSAGE, function(player, text)
     local sender = player:GetName()
     local time = Time.GetEpocheMs()
@@ -14,7 +13,6 @@ EventMgr.RegisterHandler(eLuaEvent.ON_CHAT_MESSAGE, function(player, text)
         table.insert(ChatHistory, {name = sender, text = text})
     end
 end)
-
 function RenderChatWindow()
     local flags = ImGuiWindowFlags.None
     if not GUI.IsOpen() then
