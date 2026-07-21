@@ -1,4 +1,4 @@
-modders = {
+niggers = {
     {rid = 137826756, reason = "Lexis"},
     {rid = 258776258, reason = "Lexis"},
     {rid = 282410976, reason = "Lexis"},
