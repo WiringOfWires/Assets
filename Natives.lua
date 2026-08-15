@@ -9,6 +9,10 @@ HAS_ENTITY_COLLIDED = function(entity) return Natives.InvokeBool(0x8BAD02F0368D9
 
 HAS_CONTROL_OF_ENTITY = function(entity) return Natives.InvokeBool(0x01BF60A500E28887, entity) end
 
+HAS_MODEL_LOADED = function(hash) return Natives.InvokeBool(0x98A4EB5D89A0C952, hash) end
+
+REQUEST_MODEL = function(hash) Natives.InvokeVoid(0x963D27A58DF860AC, hash) end
+
 DELETE_ENTITY = function(ptr) Natives.InvokeVoid(0xAE3CBE5BF394C9C9, ptr) end
 
 REQUEST_CONTROL_OF_ENTITY = function(entity) Natives.InvokeVoid(0xB69317BF5E782347, entity) end
@@ -46,6 +50,10 @@ SET_ENTITY_PROOFS = function(entity, bool) Natives.InvokeVoid(0xFAEE099C6F890BB8
 SET_ENTITY_COLLISION = function(entity, bool) Natives.InvokeVoid(0x1A9205C1B9EE827F, entity, bool, false) end
 
 SET_ENTITY_AS_MISSION = function(entity) Natives.InvokeVoid(0xAD738C3085FE7E11, entity, true, true) end
+
+SET_ENTITY_HEALTH = function(entity, health) Natives.InvokeVoid(0x6B76DC1F3AE6E6A3, entity, health) end
+
+UPDATE_ENTITY = function(entity) Natives.InvokeVoid(0x40FDEDB72F8293B2, entity) end
 
 -------------------------------------------------- PTFX --------------------------------------------------
 HAS_NAMED_PTFX_ASSET_LOADED = function(asset) return Natives.InvokeBool(0x8702416E512EC454, asset) end
@@ -102,14 +110,12 @@ GET_NETWORK_ID = function(entity) return Natives.InvokeInt(0xA11700682F3AD45C, e
 
 REGISTER_AS_NETWORKED = function(entity) Natives.InvokeVoid(0x06FAACD625D80CAA, entity) end
 
-SET_CAN_MIGRATE = function(net, bool) Natives.InvokeVoid(0x299EEB23175895FC, net, bool) end
+SET_NET_ID_CAN_MIGRATE = function(net, bool) Natives.InvokeVoid(0x299EEB23175895FC, net, bool) end
 
 SET_NET_ID_EXISTS_ON_ALL_MACHINES = function(net) Natives.InvokeVoid(0xE05E81A888FA63C8, net, true) end
 
 -------------------------------------------------- SOUND --------------------------------------------------
 PLAY_SOUND_FROM_COORD = function(name, x, y, z, ref, networked) Natives.InvokeVoid(0x8D8686B622B88120, -1, name, x, y, z, ref, networked, 0, true) end
-
-PLAY_SOUND_FROM_ENTITY = function(name, entity, ref, networked) Natives.InvokeVoid(0xE65F427EB70AB1ED, -1, name, entity, ref, networked, 1) end
 
 -------------------------------------------------- EXPLOSION --------------------------------------------------
 ADD_OWNED_EXPLOSION = function(owner, x, y, z, type, damage, isAudible, isInvisible, camshake) Natives.InvokeVoid(0x172AA1B624FA1013, owner, x, y, z, type, damage, isAudible, isInvisible, camshake) end
@@ -155,26 +161,36 @@ TASK_COMBAT = function(ped, target) Natives.InvokeVoid(0xF166E48407BAC484, ped, 
 
 IGNORE_EVENTS = function(ped) Natives.InvokeVoid(0x9F8AA94D6D97DBF4, ped, true) end
 
-GO_TO_ENTITY = function(ped, target, time) Natives.InvokeVoid(0x6A071245EB0D1882, ped, target, time, 1.0, 100.0, 100.0, 0) end
-
 KEEP_TASK = function(ped) Natives.InvokeVoid(0x971D38760FBC02EF, ped, true) end
 
 TASK_TEMP_ACTION = function(ped, veh, action) Natives.InvokeVoid(0xC429DCEEB339E129, ped, veh, action, -1) end
 
+TASK_FOLLOW_ENTITY = function(ped, entity) Natives.InvokeVoid(0x304AE42E357B8C7E, ped, entity, 0.0, 0.0, 0.0, 10.0, -1, 0.0, true) end
+
 -------------------------------------------------- WEAPON --------------------------------------------------
 GET_WEAPON_IMPACT_COORDS = function(ped, buffer) return Natives.InvokeBool(0x6C4D0409BA1A2BC2, ped, buffer) end
+
+GET_PED_WEAPON = function(ped) return Natives.InvokeInt(0x3B390A939AF0B5FC, ped, false) end
+
+HAS_WEAPON_ASSET_LOADED = function(hash) return Natives.InvokeBool(0x36E353271F0E90EE, hash) end
+
+REQUEST_WEAPON_ASSET = function(hash) Natives.InvokeVoid(0x5443438F033E29C3, hash) end
+
+REMOVE_WEAPON_ASSET = function(hash) Natives.InvokeVoid(0xAA08EF13F341C8FC, hash) end
+
+GET_WEAPON_HASH = function(ped, buffer) Natives.InvokeVoid(0x3A87E44BB9A01D54, ped, buffer, false) end
 
 REMOVE_WEAPON = function(ped, weapon) Natives.InvokeVoid(0x4899CB088EDF59B8, ped, weapon) end
 
 GIVE_WEAPON_TO_PED = function(ped, weapon, ammo, inHand) Natives.InvokeVoid(0xBF0FD6E56C964FCB, ped, weapon, ammo, true, inHand) end
 
-GET_PED_WEAPON = function(ped) return Natives.InvokeInt(0x3B390A939AF0B5FC, ped, false) end
-
 GET_VEHICLE_WEAPON = function(ped, buffer) Natives.InvokeVoid(0x1017582BCD3832DC, ped, buffer) end
 
-SET_PED_WEAPON = function(ped, hash) Natives.InvokeVoid(0xADF692B254977C0C, ped, hash, true) end
-
 SHOOT_BULLET = function(x1, y1, z1, x2, y2, z2, dmg, weapon, owner, isAudible, isInvisible, speed) Natives.InvokeVoid(0x867654CBC7606F2C, x1, y1, z1, x2, y2, z2, dmg, true, weapon, owner, isAudible, isInvisible, speed) end
+
+REFILL_AMMO = function(ped) Natives.InvokeVoid(0x8C0D57EA686FAD87, ped) end
+
+SET_PED_AMMO = function(ped, hash, ammo) Natives.InvokeVoid(0x14E56BC5B5DB6A19, ped, hash, ammo) end
 
 -------------------------------------------------- CAM --------------------------------------------------
 CREATE_CAM = function(cam) return Natives.InvokeInt(0xC3981DCE61D9E13F, cam, true) end
@@ -204,7 +220,7 @@ REQUEST_COLLISION_AT_COORD = function(x, y, z) Natives.InvokeVoid(0x07503F7948F4
 SET_FOCUS_POS = function(x, y, z) Natives.InvokeVoid(0xBB7454BAFF08FE25, x, y, z, 0.0, 0.0, 0.0) end
 
 -------------------------------------------------- MISC --------------------------------------------------
-IS_WARNING_MESSAGE_ACTIVE = function() return Natives.InvokeBool(0xE18B138FABC53103) end
+IS_ALERT_ACTIVE = function() return Natives.InvokeBool(0xE18B138FABC53103) end
 
 GET_ALERT_HASH = function() return Natives.InvokeInt(0x81DF9ABA6C83DFF9) end
 
@@ -221,11 +237,3 @@ DISABLE_CONTROLS = function() Natives.InvokeVoid(0x5F4B6931816E599B, 0) end
 ENABLE_CONTROL = function(control) Natives.InvokeVoid(0x351220255D64C155, 0, control) end
 
 GET_GAME_TIMER = function() return Natives.InvokeInt(0x9CD27B0045628463) end
-
-CREATE_PHONE = function(type) Natives.InvokeVoid(0xA4E8E696C532FBC7, type) end
-
-DESTROY_PHONE = function() Natives.InvokeVoid(0x3BC861DF703E5097) end
-
-ACTIVATE_CELL_CAM = function() Natives.InvokeVoid(0xFDE8F069C542D126, true, true) end
-
-ACTIVATE_SELFIE_MDOE = function() Natives.InvokeVoid(0x015C49A93E3E086E, true) end
