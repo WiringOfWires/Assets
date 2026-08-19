@@ -42,6 +42,7 @@ niggers = {
     {rid = 197791684, reason = "Lexis"},
     {rid = 246936865, reason = "Lexis"},
     {rid = 171724176, reason = "Lexis"},
+    {rid = 249216263, reason = "Lexis"},
     {rid = 216682146, reason = "Cherax Prime"},
     {rid = 283315039, reason = "Cherax Prime"},
     {rid = 263276930, reason = "Cherax Prime"},
