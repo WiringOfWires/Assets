@@ -9,10 +9,6 @@ HAS_ENTITY_COLLIDED = function(entity) return Natives.InvokeBool(0x8BAD02F0368D9
 
 HAS_CONTROL_OF_ENTITY = function(entity) return Natives.InvokeBool(0x01BF60A500E28887, entity) end
 
-HAS_MODEL_LOADED = function(hash) return Natives.InvokeBool(0x98A4EB5D89A0C952, hash) end
-
-REQUEST_MODEL = function(hash) Natives.InvokeVoid(0x963D27A58DF860AC, hash) end
-
 DELETE_ENTITY = function(ptr) Natives.InvokeVoid(0xAE3CBE5BF394C9C9, ptr) end
 
 REQUEST_CONTROL_OF_ENTITY = function(entity) Natives.InvokeVoid(0xB69317BF5E782347, entity) end
@@ -21,15 +17,11 @@ ATTACH_ENTITY_TO_ENTITY_PHYSICALLY = function(e1, e2, force) Natives.InvokeVoid(
 
 ATTACH_ENTITY_TO_ENTITY = function(e1, e2, x, y, z) Natives.InvokeVoid(0x6B9BBD38AB0796DF, e1, e2, -1, x, y, z, 0.0, 0.0, 0.0, true, false, false, false, 0, true) end
 
-DETACH = function(entity) Natives.InvokeVoid(0x961AC54BF0613F5D, entity, true, true) end
+DETACH_ENTITY = function(entity) Natives.InvokeVoid(0x961AC54BF0613F5D, entity, true, true) end
 
 FREEZE_ENTITY = function(entity, bool) Natives.InvokeVoid(0x428CA6DBD1094446, entity, bool) end
 
 BREAK_OBJECT = function(object) Natives.InvokeVoid(0xE7E4C198B0185900, object, true, true) end
-
-SET_ENTITY_DYNAMIC = function(entity) Natives.InvokeVoid(0x1718DE8E3F2823CA, entity, true) end
-
-SET_ENTITY_GRAVITY = function(entity) Natives.InvokeVoid(0x4A4722448F18EEF5, entity, true) end
 
 SET_ENTITY_ROT = function(entity, pitch, roll, yaw) Natives.InvokeVoid(0x8524A8B0171D5E07, entity, pitch, roll, yaw, 2) end
 
@@ -53,8 +45,6 @@ SET_ENTITY_AS_MISSION = function(entity) Natives.InvokeVoid(0xAD738C3085FE7E11, 
 
 SET_ENTITY_HEALTH = function(entity, health) Natives.InvokeVoid(0x6B76DC1F3AE6E6A3, entity, health) end
 
-UPDATE_ENTITY = function(entity) Natives.InvokeVoid(0x40FDEDB72F8293B2, entity) end
-
 -------------------------------------------------- PTFX --------------------------------------------------
 HAS_NAMED_PTFX_ASSET_LOADED = function(asset) return Natives.InvokeBool(0x8702416E512EC454, asset) end
 
@@ -68,26 +58,22 @@ START_LOOPED_PTFX_AT_ENTITY = function(name, entity, scale) return Natives.Invok
 
 REMOVE_NAMED_PTFX_ASSET = function(asset) Natives.InvokeVoid(0x5F61EBBE1A00F96D, asset) end
 
-SET_PTFX_ALPHA = function(ptfx, value) Natives.InvokeVoid(0xB44250AAA456492D, ptfx, value) end
-
-STOP_PTFX = function(ptfx) Natives.InvokeVoid(0x8F75998877616996, ptfx) end
-
 -------------------------------------------------- PLAYER --------------------------------------------------
 IS_FRIEND = function(buffer) return Natives.InvokeBool(0x1A24A179F9B31654, buffer) end
 
-GET_KILLER_OF_PLAYER = function(pid, ptr) return Natives.InvokeInt(0x2DA41ED6E1FCD7A5, pid, ptr) end
+GET_KILLER_OF_PLAYER = function(playerID, ptr) return Natives.InvokeInt(0x2DA41ED6E1FCD7A5, playerID, ptr) end
 
 GET_TARGETING_MODE = function() return Natives.InvokeInt(0x875BDD898B99C8CE) end
 
-IS_PLAYER_TALKING = function(pid) return Natives.InvokeBool(0x031E11F3D447647E, pid) end
+IS_PLAYER_TALKING = function(playerID) return Natives.InvokeBool(0x031E11F3D447647E, playerID) end
 
 SET_TARGETING_MODE = function(mode) Natives.InvokeVoid(0xB1906895227793F3, mode) end
 
-HANDLE_FROM_PLAYER = function(pid, buffer) Natives.InvokeVoid(0x388EB2B86C73B6B3, pid, buffer, 13) end
+HANDLE_FROM_PLAYER = function(playerID, buffer) Natives.InvokeVoid(0x388EB2B86C73B6B3, playerID, buffer, 13) end
 
 SEND_TEXT_MESSAGE = function(message, buffer) Natives.InvokeVoid(0x3A214F2EC889B100, message, buffer) end
 
-KICK_PLAYER = function(pid) Natives.InvokeVoid(0xFA8904DC5F304220, pid) end
+KICK_PLAYER = function(playerID) Natives.InvokeVoid(0xFA8904DC5F304220, playerID) end
 
 SHOW_PROFILE = function(buffer) Natives.InvokeVoid(0x859ED1CEA343FCA8, buffer) end
 
@@ -106,39 +92,25 @@ GET_SCRIPT_HOST = function() return Natives.InvokeInt(0x1D6A14F1F9A736FC, "freem
 
 GET_HOST = function() return Natives.InvokeInt(0x8251FB94DC4FDFC8) end
 
-GET_NETWORK_ID = function(entity) return Natives.InvokeInt(0xA11700682F3AD45C, entity) end
-
-REGISTER_AS_NETWORKED = function(entity) Natives.InvokeVoid(0x06FAACD625D80CAA, entity) end
-
-SET_NET_ID_CAN_MIGRATE = function(net, bool) Natives.InvokeVoid(0x299EEB23175895FC, net, bool) end
-
-SET_NET_ID_EXISTS_ON_ALL_MACHINES = function(net) Natives.InvokeVoid(0xE05E81A888FA63C8, net, true) end
-
 -------------------------------------------------- SOUND --------------------------------------------------
 PLAY_SOUND_FROM_COORD = function(name, x, y, z, ref, networked) Natives.InvokeVoid(0x8D8686B622B88120, -1, name, x, y, z, ref, networked, 0, true) end
 
 -------------------------------------------------- EXPLOSION --------------------------------------------------
-ADD_OWNED_EXPLOSION = function(owner, x, y, z, type, damage, isAudible, isInvisible, camshake) Natives.InvokeVoid(0x172AA1B624FA1013, owner, x, y, z, type, damage, isAudible, isInvisible, camshake) end
+ADD_OWNED_EXPLOSION = function(x, y, z, type, damage, isAudible, isInvisible, camshake) Natives.InvokeVoid(0x172AA1B624FA1013, GTA.PointerToHandle(GTA.GetLocalPed()), x, y, z, type, damage, isAudible, isInvisible, camshake) end
 
 ADD_EXPLOSION = function(x, y, z, type, damage, isAudible, isInvisible, camshake) Natives.InvokeVoid(0xE3AD2BDBAEE269AC, x, y, z, type, damage, isAudible, isInvisible, camshake, false) end
 
 -------------------------------------------------- PED --------------------------------------------------
-IS_PED_IN_ANY_VEH = function(ped) return Natives.InvokeBool(0x997ABD671D25CA0B, ped, false) end
+IS_PED_IN_ANY_VEHICLE = function(ped) return Natives.InvokeBool(0x997ABD671D25CA0B, ped, false) end
 
 GET_PED_VEHICLE = function(ped) return Natives.InvokeInt(0x9A9112A0FE9A4713, ped, false) end
 
-SET_PED_INTO_VEH = function(ped, veh, seat) Natives.InvokeVoid(0xF75B0D629E1C063D, ped, veh, seat) end
+SET_PED_INTO_VEHICLE = function(ped, veh, seat) Natives.InvokeVoid(0xF75B0D629E1C063D, ped, veh, seat) end
 
 SET_PED_RAGDOLL = function(ped) Natives.InvokeVoid(0xAE99FB955581844A, ped, -1, -1, 0, true, true, true) end
 
 -------------------------------------------------- VEHICLE --------------------------------------------------
-IS_HORN_ACTIVE = function(pid) return Natives.InvokeBool(0xFA1E2BF8B10598F9, pid) end
-
-SET_VEH_MOD_KIT = function(veh) Natives.InvokeVoid(0x1F2AA07F00B3217A, veh, 0) end
-
-SET_VEH_MOD = function(veh, type, mod) Natives.InvokeVoid(0x6AF0636DDEDCB6DD, veh, type, mod, false) end
-
-SET_VEH_COLORS = function(veh, c1, c2) Natives.InvokeVoid(0x4F1D4BE3A7F24601, veh, c1, c2) end
+IS_HORN_ACTIVE = function(playerID) return Natives.InvokeBool(0xFA1E2BF8B10598F9, playerID) end
 
 SET_VEH_MAX_SPEED = function(veh, speed) Natives.InvokeVoid(0xBAA045B4E42F3C06, veh, speed) end
 
@@ -151,32 +123,24 @@ IS_BOMB_BAY_OPEN = function(veh) return Natives.InvokeBool(0xD0917A423314BBA8, v
 -------------------------------------------------- TASK --------------------------------------------------
 TASK_SHOOT_AT_ENTITY = function(ped, target, duration) Natives.InvokeVoid(0x08DA95E8298AE772, ped, target, duration, Utils.Joaat("FIRING_PATTERN_FULL_AUTO")) end
 
-TASK_SHOOT_AT_COORD = function(ped, x, y, z, duration) Natives.InvokeVoid(0x46A6CC01E0826106, ped, x, y, z, duration, Utils.Joaat("FIRING_PATTERN_FULL_AUTO")) end
-
 SET_PED_SHOOTING = function(ped, x, y, z) Natives.InvokeVoid(0x96A05E4FB321B1BA, ped, x, y, z, true) end
 
 TASK_RELOAD = function(ped) Natives.InvokeVoid(0x62D2916F56B9CD2D, ped, true) end
 
 TASK_COMBAT = function(ped, target) Natives.InvokeVoid(0xF166E48407BAC484, ped, target, 0, 16) end
 
-IGNORE_EVENTS = function(ped) Natives.InvokeVoid(0x9F8AA94D6D97DBF4, ped, true) end
+BLOCK_OTHER_EVENTS = function(ped) Natives.InvokeVoid(0x9F8AA94D6D97DBF4, ped, true) end
 
 KEEP_TASK = function(ped) Natives.InvokeVoid(0x971D38760FBC02EF, ped, true) end
 
 TASK_TEMP_ACTION = function(ped, veh, action) Natives.InvokeVoid(0xC429DCEEB339E129, ped, veh, action, -1) end
 
-TASK_FOLLOW_ENTITY = function(ped, entity) Natives.InvokeVoid(0x304AE42E357B8C7E, ped, entity, 0.0, 0.0, 0.0, 10.0, -1, 0.0, true) end
+TASK_LOOK_AT_ENTITY = function(ped, entity) Natives.InvokeVoid(0x69F4BE8C8CC4796C, ped, entity, -1) end
 
 -------------------------------------------------- WEAPON --------------------------------------------------
 GET_WEAPON_IMPACT_COORDS = function(ped, buffer) return Natives.InvokeBool(0x6C4D0409BA1A2BC2, ped, buffer) end
 
 GET_PED_WEAPON = function(ped) return Natives.InvokeInt(0x3B390A939AF0B5FC, ped, false) end
-
-HAS_WEAPON_ASSET_LOADED = function(hash) return Natives.InvokeBool(0x36E353271F0E90EE, hash) end
-
-REQUEST_WEAPON_ASSET = function(hash) Natives.InvokeVoid(0x5443438F033E29C3, hash) end
-
-REMOVE_WEAPON_ASSET = function(hash) Natives.InvokeVoid(0xAA08EF13F341C8FC, hash) end
 
 GET_WEAPON_HASH = function(ped, buffer) Natives.InvokeVoid(0x3A87E44BB9A01D54, ped, buffer, false) end
 
@@ -187,37 +151,6 @@ GIVE_WEAPON_TO_PED = function(ped, weapon, ammo, inHand) Natives.InvokeVoid(0xBF
 GET_VEHICLE_WEAPON = function(ped, buffer) Natives.InvokeVoid(0x1017582BCD3832DC, ped, buffer) end
 
 SHOOT_BULLET = function(x1, y1, z1, x2, y2, z2, dmg, weapon, owner, isAudible, isInvisible, speed) Natives.InvokeVoid(0x867654CBC7606F2C, x1, y1, z1, x2, y2, z2, dmg, true, weapon, owner, isAudible, isInvisible, speed) end
-
-REFILL_AMMO = function(ped) Natives.InvokeVoid(0x8C0D57EA686FAD87, ped) end
-
-SET_PED_AMMO = function(ped, hash, ammo) Natives.InvokeVoid(0x14E56BC5B5DB6A19, ped, hash, ammo) end
-
--------------------------------------------------- CAM --------------------------------------------------
-CREATE_CAM = function(cam) return Natives.InvokeInt(0xC3981DCE61D9E13F, cam, true) end
-
-GET_CAM_COORD = function(cam) return Natives.InvokeV3(0xBAC038F7459AE5AE, cam) end
-
-GET_CAM_FOV = function(cam) return Natives.InvokeFloat(0xC3330A45CCCDB26A, cam) end
-
-SET_CAM_COORD = function(cam, x, y, z) Natives.InvokeVoid(0x4D41783FB745E42E, cam, x, y, z) end
-
-SET_CAM_ROT = function(cam, x, y, z) Natives.InvokeVoid(0x85973643155D0B07, cam, x, y, z, 2) end
-
-SET_CAM_ACTIVE = function(cam, bool) Natives.InvokeVoid(0x026FB97D0A425F84, cam, bool) end
-
-RENDER_CAMS = function(bool) Natives.InvokeVoid(0x07E5B515DB0636FC, bool) end
-
-SET_CAM_FOV = function(cam, fov) Natives.InvokeVoid(0xB13C14F66A00D047, cam, fov) end
-
-SET_CAM_COORD = function(cam, x, y, z) Natives.InvokeVoid(0x4D41783FB745E42E, cam, x, y, z) end
-
-DESTROY_CAM = function(cam) Natives.InvokeVoid(0x865908C81A2C22E9, cam, true) end
-
-CLEAR_FOCUS = function() Natives.InvokeVoid(0x31B73D1EA9F01DA2) end
-
-REQUEST_COLLISION_AT_COORD = function(x, y, z) Natives.InvokeVoid(0x07503F7948F491A7, x, y, z) end
-
-SET_FOCUS_POS = function(x, y, z) Natives.InvokeVoid(0xBB7454BAFF08FE25, x, y, z, 0.0, 0.0, 0.0) end
 
 -------------------------------------------------- MISC --------------------------------------------------
 IS_ALERT_ACTIVE = function() return Natives.InvokeBool(0xE18B138FABC53103) end
