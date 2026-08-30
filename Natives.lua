@@ -15,6 +15,8 @@ REQUEST_CONTROL_OF_ENTITY = function(entity) Natives.InvokeVoid(0xB69317BF5E7823
 
 ATTACH_ENTITY_TO_ENTITY_PHYSICALLY = function(e1, e2, force) Natives.InvokeVoid(0xC3675780C92F90F9, e1, e2, -1, -1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, force, true, true, true, true, 0) end
 
+ATTACH_ENTITY_TO_ENTITY = function(e1, e2, x, y, z) Natives.InvokeVoid(0x6B9BBD38AB0796DF, e1, e2, -1, x, y, z, 0.0, 0.0, 0.0, true, true, true, false, 0, true, 0) end
+
 DETACH_ENTITY = function(entity) Natives.InvokeVoid(0x961AC54BF0613F5D, entity, true, true) end
 
 FREEZE_ENTITY = function(entity, bool) Natives.InvokeVoid(0x428CA6DBD1094446, entity, bool) end
